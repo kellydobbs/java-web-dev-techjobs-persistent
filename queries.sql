@@ -8,5 +8,5 @@ FROM employer
 WHERE location = 'st.louis';
 
 ## Part 3: Test it with SQL
-
+DROP table job
 ## Part 4: Test it with SQL
