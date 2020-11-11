@@ -57,21 +57,11 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
-        //Add code to select the employer object that has been chosen to be affiliated with the new job.
-        // You will need to select the employer using the request parameter you’ve added to the method.
-        // how do I add the employer id to the table?
-
-//        model.addAttribute("employer", employerRepository.findById(employerId));
-//        model.addAttribute(new Employer(employerRepository.findById(employerId)));
-       // Optional optEmployer = employerRepository.findById(employerId);
-       //  Employer employer = employerRepository.findById(employerId);
-
-
+        newJob.setEmployer(employerRepository.findById(employerId).get());
         List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
         newJob.setSkills(skillObjs);
 
         jobRepository.save(newJob);
-        model.addAttribute("new job", jobRepository.findById(newJob.getId()));
 
 
         return "redirect:";
@@ -79,6 +69,9 @@ public class HomeController {
 
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
+        Job job = jobRepository.findById(jobId).get();
+
+        model.addAttribute("job", job);
 
         return "view";
     }
