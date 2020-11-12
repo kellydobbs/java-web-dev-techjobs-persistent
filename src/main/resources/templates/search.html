@@ -50,6 +50,10 @@
                     <a th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></a>
                 </p>
                 <p>
+                Location:
+                <a th:href="@{'../list/jobs?column=location&value=' + ${job.employer.location}}" th:text="${job.employer.location}"></a>
+            </p>
+                <p>
                     Skills:
                     <ul th:each="skill : ${job.skills}">
                       <li>

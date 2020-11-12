@@ -53,7 +53,7 @@ public class JobData {
         } else if (fieldName.equals("employer")){
             theValue = job.getEmployer().toString();
         } else if (fieldName.equals("location")) {
-            theValue = job.getEmployer().getLocation().toString();
+            theValue = job.getEmployer().getLocation();
         } else {
             theValue = job.getSkills().toString();
         }
