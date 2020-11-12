@@ -14,14 +14,22 @@
 <table class="centeredTable">
     <tr>
         <th>All</th>
+        <th>Position</th>
         <th>Employer</th>
         <th>Skill</th>
+        <th>Location</th>
+
     </tr>
 
     <tr>
         <td>
             <li>
                 <a th:href="@{/list/jobs(column='All',value='View All')}">View All</a>
+            </li>
+        </td>
+        <td>
+            <li th:each="position : ${position}">
+                <a th:href="@{/list/jobs(column=position,value=${position.name})}" th:text="${position.name}"></a>
             </li>
         </td>
         <td>
@@ -32,6 +40,11 @@
         <td>
             <li th:each="skill : ${skills}">
                 <a th:href="@{/list/jobs(column=skill,value=${skill.name})}" th:text="${skill.name}"></a>
+            </li>
+        </td>
+        <td>
+            <li th:each="employer : ${location}">
+                <a th:href="@{/list/jobs(column=location,value=${employer.location})}" th:text="${employer.location}"></a>
             </li>
         </td>
     </tr>

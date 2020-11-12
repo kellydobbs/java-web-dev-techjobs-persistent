@@ -36,24 +36,30 @@ public class ListController {
     public ListController () {
 
         columnChoices.put("all", "All");
+        columnChoices.put("position", "Position");
         columnChoices.put("employer", "Employer");
         columnChoices.put("skill", "Skill");
+        columnChoices.put("location", "Location");
 
     }
 
     @RequestMapping("")
     public String list(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
-        model.addAttribute("skills",skillRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("location", employerRepository.findAll());
+        model.addAttribute("position", jobRepository.findAll());
         return "list";
     }
 
 
     @RequestMapping(value = "jobs")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+
         Iterable<Job> jobs;
         if (column.toLowerCase().equals("all")){
             jobs = jobRepository.findAll();
+            System.out.println(jobs);
             if (!jobs.iterator().hasNext()) {
                 model.addAttribute("title", "No jobs");
             } else {
@@ -62,6 +68,7 @@ public class ListController {
 
         } else {
             jobs = JobData.findByColumnAndValue(column, value, jobRepository.findAll());
+
             if (!jobs.iterator().hasNext()) {
                 model.addAttribute("title", "No jobs with " + columnChoices.get(column) + ": " + value);
             } else {

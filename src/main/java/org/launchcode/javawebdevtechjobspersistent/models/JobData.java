@@ -2,8 +2,6 @@ package org.launchcode.javawebdevtechjobspersistent.models;
 
 import java.util.ArrayList;
 
-// This is a change made in sandbox.
-
 /**
  * Created by LaunchCode
  */
@@ -33,24 +31,29 @@ public class JobData {
             results = findByValue(value, allJobs);
             return results;
         }
+        System.out.println(column);
+        System.out.println(value);
+
         for (Job job : allJobs) {
 
             String aValue = getFieldValue(job, column);
+            System.out.println(aValue);
 
             if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
                 results.add(job);
             }
         }
-
         return results;
     }
 
     public static String getFieldValue(Job job, String fieldName){
         String theValue;
-        if (fieldName.equals("name")){
+        if (fieldName.equals("position")){
             theValue = job.getName();
         } else if (fieldName.equals("employer")){
             theValue = job.getEmployer().toString();
+        } else if (fieldName.equals("location")) {
+            theValue = job.getEmployer().getLocation().toString();
         } else {
             theValue = job.getSkills().toString();
         }
