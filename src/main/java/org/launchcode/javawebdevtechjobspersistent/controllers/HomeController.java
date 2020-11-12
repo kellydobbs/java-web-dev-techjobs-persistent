@@ -48,7 +48,6 @@ public class HomeController {
         return "add";
     }
 
-    //add a parameter to the method to pass in the template variable employerId
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
@@ -64,7 +63,7 @@ public class HomeController {
         jobRepository.save(newJob);
 
 
-        return "redirect:";
+        return "view";
     }
 
     @GetMapping("view/{jobId}")
